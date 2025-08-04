@@ -104,7 +104,34 @@ src: ./pages/hypervisor-in-1000-lines.md
 
 ---
 
-# Hypervisors are the `catch` block
+# A life of a hypervisor (in JavaScript)
+
+```ts
+kernelImage = readFileSync("kernel.bin");
+
+memory = new GuestMemory();  // 1. Build a memory space
+memory.add(kernelImage);     // 2. Load the program (guest kernel)
+
+vcpu = new VCpu();           // 3. Initialize the vCPU state
+for (;;) {
+    try {
+        vcpu.enterGuest();   // 4. Enter the guest mode
+    } catch (exit) {
+        handleVMExit(exit);  // 5. Handle exit and go back to 4
+    }
+}
+```
+
+---
+
+# Hypervisors are the `catch` block!
+
+| JavaScript | Hardware-assisted virtualization |
+| --- | --- |
+| `try` block | guest mode |
+| `catch` block | hypervisor's trap handler |
+| `throw` | VM exit |
+| `error` | VM exit reason |
 
 ---
 
