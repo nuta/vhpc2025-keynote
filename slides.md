@@ -9,6 +9,8 @@ transition: false
 mdc: true
 seoMeta:
   ogImage: auto
+fonts:
+  mono: JetBrains Mono
 ---
 
 ## Writing a Hypervisor From Scratch
@@ -18,13 +20,16 @@ Seiya Nuta
 <nuta@seiya.me>
 
 ---
+layout: center
+---
+
 # What I'm going to talk about
 
-- ❌ Writing a hypervisor from scratch in 45 minutes
+- ❌ Writing a hypervisor from scratch in 40 minutes
 
 - ❌ Being able to write a hypervisor from scratch
 
-- ✅ Rediscover the not-so-obvious perspective on virtualization: **virtualization are not only about implementing fast virtual machines!**
+- ✅ (hardware-assisted) virtualization are not only for VMs!
 
 ---
 layout: two-cols-header
@@ -42,11 +47,10 @@ layout: two-cols-header
 ::right::
 
 TODO: image here
-
-# 
+ 
 
 ---
-layout: cover
+layout: center
 ---
 
 Intel VT-x/AMD-V/Arm VHE/RISC-V H are ...
@@ -54,6 +58,7 @@ Intel VT-x/AMD-V/Arm VHE/RISC-V H are ...
 # hardware-assisted `try-catch` (with continuation)
 
 ---
+
 # Try-catch pattern
 
 ```ts
@@ -70,6 +75,7 @@ try {
   - Retry from the beginning or abort the program.
 
 ---
+
 # Try-catch pattern + continuation
 
 Let's assume that we have a `resume` callback:
@@ -89,24 +95,33 @@ try {
 - cf. Algebraic Effects
 
 ---
-layout: cover
+layout: fact
 ---
 
-# Hypervisors implement the `catch` block
+---
+src: ./pages/hypervisor-in-1000-lines.md
+---
 
 ---
+
+# Hypervisors are the `catch` block
+
+---
+
 # Linux KVM
 
 ```c
 ```
 
 ---
+
 # FreeBSD bhyve
 
 ```c
 ```
 
 ---
+
 # Fuchsia
 
 (^ hardware-assisted)
@@ -115,32 +130,60 @@ layout: cover
 ```
 
 ---
+
 # Hypervisors are `catch` blocks
 
 - Virtual Machine Monitor (VMM)
 
 ---
-layout: fact
+layout: cover
 ---
 
-# Hello
-
-woorld
+# The `try-catch` pattern in action
 
 ---
-#
+
+# Hyperlight (2024)
+
+Microsoft Azure Core Upstream team
+
+- Out32
+
+
+https://opensource.microsoft.com/blog/2024/11/07/introducing-hyperlight-virtual-machine-based-security-for-functions-at-scale/
 
 ---
-# Introduction
 
-DO we need a hypervisor?
+# Nabla Containers
 
-DO we need a hypervisor?
+---
 
-DO we need a hypervisor?
+# gVisor
 
-DO we need a hypervisor?
 
-DO we need a hypervisor?
+---
 
-asd
+# Noah
+
+---
+
+# Virtulization is not only about virtual machines
+
+- Interface matters.
+- Consider (hardware-assited) hypervisors as JavaScript interpreters.
+  - More application-specific interfaces.
+    - Reducing "semantic gap", less overheads, and offloading to stuff to hypervisor. Like TLS.
+  - How do you interact with JavaScript world? Shared memory, queues, or calling host functions like PIO (`outb`/`inb`)?
+- Do we really need virtio?
+  - You can implement a hypervisor on top of a microkernel.
+- If you see like this, don't Hyperlight, gVisor look familar to you?
+
+---
+layout: cover
+---
+
+# What's coming next? (my ideas)
+
+---
+
+# Virtulization-based isolation in microkernels? (needs investigation!)
