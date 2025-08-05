@@ -109,10 +109,10 @@ src: ./pages/hypervisor-in-1000-lines.md
 ```ts
 kernelImage = readFileSync("kernel.bin");
 
-memory = new GuestMemory();  // 1. Build a memory space
+memory = new GuestMemory();  // 1. Prepare memory
 memory.add(kernelImage);     // 2. Load the program (guest kernel)
 
-vcpu = new VCpu();           // 3. Initialize the vCPU state
+vcpu = new VCpu();           // 3. Initialize vCPU state
 for (;;) {
     try {
         vcpu.enterGuest();   // 4. Enter the guest mode
@@ -135,25 +135,71 @@ for (;;) {
 
 ---
 
-# Linux KVM
+# Linux KVM API (simplified)
 
 ```c
+guest_memory = mmap(...);                   // 1. Prepare memory
+memcpy(guest_memory, ...);                  // 2. Load the program
+
+kvm_fd = open("/dev/kvm", O_RDWR);          
+vm_fd = ioctl(kvm_fd, KVM_CREATE_VM, 0);    
+vcpu_fd = ioctl(vm_fd, KVM_CREATE_VCPU, 0); // 3. Initialize vCPU state
+
+struct kvm_run *run = mmap(...);
+for (;;) {
+    ioctl(vcpu_fd, KVM_RUN, &run);          // 4. Enter the guest mode
+    switch (run.exit_reason) {              // 5. Handle exit and
+        case KVM_EXIT_MMIO:                 //      go back to (4)
+        ...
+    }
+}
 ```
 
 ---
 
-# FreeBSD bhyve
+# FreeBSD bhyve API (simplified)
+
+TODO: Fix APIs
 
 ```c
+ctx = vm_create("vm_name");
+vm_setup_memory(ctx, mem_size, VM_MMAP_ALL); // 1. Prepare memory
+guest_mem = vm_map_gpa(ctx, addr, size);     // 2. Load the program
+memcpy(guest_mem, ...);
+vm_vcpu_reset(ctx, 0);                       // 3. Initialize vCPU
+vm_set_register(...);
+
+struct vm_exit vmexit;
+for (;;) {
+    vm_run(ctx, 0, &vmexit);                 // 4. Enter guest mode
+    switch (vmexit.exitcode) {               // 5. Handle exit and
+        case VM_EXITCODE_MMIO:               //       go back to (4)
+        ...
+    }
+}
 ```
 
 ---
 
-# Fuchsia
-
-(^ hardware-assisted)
+# Fuchsia API (simplified)
 
 ```c
+zx_guest_create(..., &guest, &vmar);
+zx_vmar_allocate(..., &addr);        // 1. Prepare memory
+memcpy(addr, ...);                   // 2. Load the program
+zx_vmar_map(vmar,...);
+
+zx_vcpu_create(guest, ..., &vcpu);   // 3. Initialize vCPU
+zx_vcpu_write_state(vcpu, ...);
+
+zx_port_packet_t packet;
+for (;;) {
+    zx_vcpu_enter(vcpu, &packet);    // 4. Enter guest mode
+    switch (packet.type) {           // 5. Handle exit and
+        case ZX_PKT_TYPE_GUEST_MEM:  //       go back to (4)
+        ...
+    }
+}
 ```
 
 ---
