@@ -154,30 +154,7 @@ for (;;) {
     }
 }
 ```
-
----
-
-# FreeBSD bhyve API (simplified)
-
-TODO: Fix APIs
-
-```c
-ctx = vm_create("vm_name");
-vm_setup_memory(ctx, mem_size, VM_MMAP_ALL); // 1. Prepare memory
-guest_mem = vm_map_gpa(ctx, addr, size);     // 2. Load the program
-memcpy(guest_mem, ...);
-vm_vcpu_reset(ctx, 0);                       // 3. Initialize vCPU
-vm_set_register(...);
-
-struct vm_exit vmexit;
-for (;;) {
-    vm_run(ctx, 0, &vmexit);                 // 4. Enter guest mode
-    switch (vmexit.exitcode) {               // 5. Handle exit and
-        case VM_EXITCODE_MMIO:               //       go back to (4)
-        ...
-    }
-}
-```
+- FreeBSD bhyve uses a similar interface (`ioctl`).
 
 ---
 
@@ -199,6 +176,28 @@ for (;;) {
         case ZX_PKT_TYPE_GUEST_MEM:  //       go back to (4)
         ...
     }
+}
+```
+
+---
+
+# seL4 libvmm API (simplified)
+
+```c
+void init(void) {
+  // 1-2. Prepare memory and load the program
+  linux_setup_images(...);
+  // 3-4. Initialize vCPU and enter guest mode
+  guest_start();
+}
+
+// 5. Handle exit and go back to guest mode
+seL4_Bool fault(size_t vcpu_id, microkit_msginfo msginfo, ...) {
+  label = microkit_msginfo_get_label(msginfo);
+  switch (label) {
+  case seL4_Fault_VMFault:
+      ...
+  }
 }
 ```
 
