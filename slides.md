@@ -39,8 +39,8 @@ layout: two-cols-header
 
 ::left::
 
-- Intel VT-x
-- AMD-V
+- Intel VT
+- AMD SVM
 - Arm Virtualization Host Extensions
 - RISC-V H extension
 
@@ -53,7 +53,7 @@ TODO: image here
 layout: center
 ---
 
-Intel VT-x/AMD-V/Arm VHE/RISC-V H are ...
+Intel VT/AMD SVM/Arm VHE/RISC-V H are ...
 
 # hardware-assisted `try-catch` (with continuation)
 
@@ -187,7 +187,7 @@ for (;;) {
 void init(void) {
   // 1-2. Prepare memory and load the program
   linux_setup_images(...);
-  // 3-4. Initialize vCPU and enter guest mode
+  // 3-4. Initialize vCPU and start it
   guest_start();
 }
 
@@ -215,27 +215,64 @@ layout: cover
 
 ---
 
-# Hyperlight (2024)
+# gVisor: Hypervisor as a container sandbox
 
-Microsoft Azure Core Upstream team
+- A VMM for running multi-tenant Linux containers.
+- A new guest kernel written in Go emulates Linux.
+- Guest ↔︎ host interface is limited than running containers directly.
 
-- Out32
-
-
-https://opensource.microsoft.com/blog/2024/11/07/introducing-hyperlight-virtual-machine-based-security-for-functions-at-scale/
-
----
-
-# Nabla Containers
+gVisor: https://github.com/google/gvisor
 
 ---
 
-# gVisor
+# Hyperlight: Hypervisor as a function sandbox
 
+- A VMM for running multi-tenant functions (vs. containers in gVisor).
+- Uses hardware-assisted virtualization as an isolation boundary.
+- Fast cold start time (1-2 ms).
+- `Out32` to trigger VM exit.
+
+Hyperlight: https://github.com/hyperlight-dev/hyperlight
+
+----
+
+# Noah: Hypervisor for system call emulation
+
+- Run applications in guest mode **w/o guest kernel**.
+- VMM intercepts system calls and emulates them.
+- Hypervisor as a system call hook.
+
+https://doi.org/10.1145/3381052.3381327
 
 ---
+layout: two-cols-header
+---
 
-# Noah
+# Nabla Containers: Higher-level hypervisor interface
+
+:: left ::
+
+- Unikernels as (strongly-isolated) processes.
+- Q: Do we really need virtual "devices" in guest?
+- Hypercalls look more like system calls, not devices.
+
+:: right ::
+
+```
+walltime
+puts
+poll
+blkread
+blkwrite
+netwrite
+netread
+halt
+
+blkinfo (deprecated)
+netinfo (deprecated)
+```
+
+<!-- Unikernels as Processes: https://doi.org/10.1145/3267809.3267845 -->
 
 ---
 
