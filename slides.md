@@ -203,9 +203,15 @@ seL4_Bool fault(size_t vcpu_id, microkit_msginfo msginfo, ...) {
 
 ---
 
-# Hypervisors are `catch` blocks
+# Hypervisors are `catch` blocks (w/ continuation)
 
-- Virtual Machine Monitor (VMM)
+- All APIs have a similar structure:
+  1. **Init:** Prepare guest memory and vCPUs
+  2. **Try:** Enter the guest mode
+  3. **Catch:** Handle an exception (e.g. emulate MMIO)
+  4. **Continue:** Jump to step 2
+
+- Virtual Machine Monitor (VMM) in userspace (e.g. Firecracker) is a convenient/secure form of implementing the catch block.
 
 ---
 layout: cover
@@ -219,7 +225,7 @@ layout: cover
 
 - A VMM for running multi-tenant Linux containers.
 - A new guest kernel written in Go emulates Linux.
-- Guest ↔︎ host interface is limited than running containers directly.
+- Guest ↔︎ host interface is narrower than running containers directly.
 
 gVisor: https://github.com/google/gvisor
 
@@ -276,16 +282,22 @@ netinfo (deprecated)
 
 ---
 
-# Virtulization is not only about virtual machines
+# (hardware-assisted) hypervisors look like interpreters
 
-- Interface matters.
-- Consider (hardware-assited) hypervisors as JavaScript interpreters.
-  - More application-specific interfaces.
-    - Reducing "semantic gap", less overheads, and offloading to stuff to hypervisor. Like TLS.
-  - How do you interact with JavaScript world? Shared memory, queues, or calling host functions like PIO (`outb`/`inb`)?
-- Do we really need virtio?
-  - You can implement a hypervisor on top of a microkernel.
-- If you see like this, don't Hyperlight, gVisor look familar to you?
+- Both run a program in a different world.
+- Both define an interface (hypercalls / foreign function interface).
+- Both (sometimes) need a secure isolation to run untrusted code.
+
+---
+
+# Hardware-assited virtualization is not only for VMs
+
+- It's a hardware-assited `try-catch` mechanism.
+- The guest ↔︎ host interface matters.
+  - Application-specific interfaces are OK.
+  - Virtio is a great generic queue, but we don't need to stick to it.
+
+From this perspective, don't Hyperlight, gVisor, Noah sound familar to you?
 
 ---
 layout: cover
