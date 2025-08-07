@@ -95,10 +95,6 @@ try {
 - cf. Algebraic Effects
 
 ---
-layout: fact
----
-
----
 src: ./pages/hypervisor-in-1000-lines.md
 ---
 
@@ -110,7 +106,7 @@ src: ./pages/hypervisor-in-1000-lines.md
 kernelImage = readFileSync("kernel.bin");
 
 memory = new GuestMemory();  // 1. Prepare memory
-memory.add(kernelImage);     // 2. Load the program (guest kernel)
+memory.copy(kernelImage);    // 2. Load the program (guest kernel)
 
 vcpu = new VCpu();           // 3. Initialize vCPU state
 for (;;) {
@@ -124,7 +120,7 @@ for (;;) {
 
 ---
 
-# Hypervisors are the `catch` block!
+# Hypervisors are the `catch` block (mostly)
 
 | JavaScript | Hardware-assisted virtualization |
 | --- | --- |
@@ -307,4 +303,44 @@ layout: cover
 
 ---
 
-# Virtulization-based isolation in microkernels? (needs investigation!)
+# Virtio alternatives: Higher-level hypercalls
+
+- Virtio is a generic queue + notification mechanism.
+- Good fit for virtual devices.
+- What if we port Foreign Function Interface techniques to hypervisors?
+  - Zero-copy data transfer, etc.
+
+---
+
+# Strongly-isolated JavaScript
+
+- V8 isolates are popular isolation boundary in multi-tenant JavaScript-powered clouds (e.g. Cloudflare Workers and Deno Deploy).
+- However, V8 isolates are not secure boundary.
+- What if we use a thin hypervisor as a secure boundary, deeply integrated with JavaScript JIT engine?
+
+---
+
+# AI agent sandboxing
+
+- We can't trust what LLMs do (e.g. it might do `rm -rf /`).
+- How should LLMs control the sandboxed environment?
+
+---
+
+# Efficient VM snapshotting
+
+- Cold start time is a key performance metric in multi-tenant hypervisors.
+- VMM and Linux kernel are pretty fast (< 20ms) to boot up.
+- Applications are super slow to start up (> 100ms), and VM snapshots solve this.
+- However, VM snapshot images are not so small (> 100MB).
+- How should we manage VM snapshots efficiently?
+  - Stargz Snapshotter (lazy pulling).
+
+---
+
+# Invest in user (*"developer"*) experience
+
+- Hypervisor as a library - use a VM like a subprocess.
+- Strongly-isolated CGI - spawn lightweight VM per HTTP request, like we use to do in `cgi-bin`.
+
+**No novel technology here: just change how your hypervisor look like!**
