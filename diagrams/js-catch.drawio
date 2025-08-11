@@ -1,0 +1,50 @@
+<mxfile host="65bd71144e">
+    <diagram id="-i1Ww_GGwBXFwLh-qZra" name="Page-1">
+        <mxGraphModel dx="753" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Runtime library&#10;(C++ world)" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Verdana;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="355.5" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="catch block&#10;(JS world)" style="whiteSpace=wrap;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Verdana;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="130" y="358" width="180" height="77.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="try block&lt;br style=&quot;font-size: 18px;&quot;&gt;(JS world)" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fontSize=18;fontFamily=Verdana;fillColor=#F8D8D8;strokeColor=#FFCCCC;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="338" width="150" height="107" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=none;endFill=0;startArrow=block;startFill=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="3">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="400" y="397" as="sourcePoint"/>
+                        <mxPoint x="290" y="398" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 16px;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;try&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=middle;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="306" y="348" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 16px;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;abort try catch and&lt;br&gt;enter the catch block&lt;br&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=middle;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="322.5" y="454" width="285" height="23" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=none;endFill=0;startArrow=block;startFill=1;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="630" y="395" as="sourcePoint"/>
+                        <mxPoint x="530" y="395" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 16px;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;throw&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=middle;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="520" y="348" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=none;endFill=0;startArrow=block;startFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1;" edge="1" parent="1" source="3" target="2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="800.8" y="436.84999999999985" as="sourcePoint"/>
+                        <mxPoint x="680" y="435.49999999999994" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="220" y="490"/>
+                            <mxPoint x="715" y="490"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

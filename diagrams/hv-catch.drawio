@@ -1,0 +1,50 @@
+<mxfile host="65bd71144e">
+    <diagram id="ZLxBFHfKS9q5K6NNhN-_" name="Page-1">
+        <mxGraphModel dx="753" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="8" value="Host kernel" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Verdana;fontStyle=1;fontSize=21;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="177.5" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="VMM" style="whiteSpace=wrap;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Verdana;fontStyle=1;fontSize=19;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="180" width="180" height="77.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Guest" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fontSize=19;fontFamily=Verdana;fillColor=#F8D8D8;strokeColor=#FFCCCC;strokeWidth=2;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="410" y="160" width="130" height="107" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=none;endFill=0;startArrow=block;startFill=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="410" y="219" as="sourcePoint"/>
+                        <mxPoint x="300" y="220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 16px;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;VM enter &lt;font color=&quot;#ff0000&quot;&gt;(try)&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=middle;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="316" y="170" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 16px;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;stop guest &amp;amp; deliver exit info&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;(catch)&lt;/font&gt;&lt;br&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=middle;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="332.5" y="270" width="285" height="23" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=none;endFill=0;startArrow=block;startFill=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="640" y="217" as="sourcePoint"/>
+                        <mxPoint x="530.0000000000001" y="216.83" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 16px;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;VM exit&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=middle;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="170" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=none;endFill=0;startArrow=block;startFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1;" parent="1" source="10" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="810.8" y="258.84999999999985" as="sourcePoint"/>
+                        <mxPoint x="690" y="257.49999999999994" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="230" y="310"/>
+                            <mxPoint x="725" y="310"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

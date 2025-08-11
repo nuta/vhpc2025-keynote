@@ -114,7 +114,13 @@ for (;;) {
 
 # Hypervisors are the `catch` block (mostly)
 
-TODO: diagram
+- VMM and try-catch blocks have a similar flow:
+
+![](./diagrams/hv-catch.svg)
+
+<hr>
+
+![](./diagrams/js-catch.svg)
 
 ---
 
@@ -312,6 +318,8 @@ layout: cover
   - Good fit for virtual devices.
 - What if we port Foreign Function Interface techniques to hypervisors?
   - Zero-copy data transfer, etc.
+
+![](./diagrams/virtio.svg)
 
 ---
 
