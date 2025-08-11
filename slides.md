@@ -308,22 +308,19 @@ layout: cover
 
 # What's coming next? (my ideas)
 
-- Higher-level, rich hypervisor interface!
+- The guest ↔︎ host interface goes higher!
 
 ---
 
-# Virtio alternatives: Higher-level hypercalls
+# Virtio alternatives: Do we need a queue interface?
 
 - Virtio is a generic queue + notification mechanism.
-  - Good fit for virtual devices.
-- What if we port Foreign Function Interface techniques to hypervisors?
-  - Zero-copy data transfer, etc.
-
+- Similar to io_uring - and Linux provides more I/O APIs!
 ![](./diagrams/virtio.svg)
 
 ---
 
-# Virtio-tcp & udp
+# Higher-level interfaces in Virtio: virtio-tcp & udp
 
 - File system is abstracted as virtio-fs.
 - What about network?

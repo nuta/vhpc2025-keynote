@@ -145,16 +145,16 @@ pub struct GuestMemory {
 
 ::right::
 
-TODO: diagram
+![](../diagrams/guest-memory.svg)
 
 ---
 
 # Guest page table
 
-TODO: diagram
-
 - Maps guest-physical addresses to host-physical addresses.
 - Very similar to typical multi-level page tables (like x86-64/Arm).
+
+![](../diagrams/guest-page-table.svg)
 
 ---
 
