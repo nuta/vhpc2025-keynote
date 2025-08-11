@@ -1,0 +1,39 @@
+<mxfile host="65bd71144e">
+    <diagram id="wW-QAOQ0q9OzYWDFi9vV" name="Page-1">
+        <mxGraphModel dx="782" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="12" value="Host process" style="whiteSpace=wrap;strokeWidth=2;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Verdana;fontStyle=1;fontSize=19;fontColor=#333333;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="250" y="110" width="270" height="270" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Guest" style="whiteSpace=wrap;strokeWidth=2;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Verdana;fontStyle=1;fontSize=17;fontColor=#333333;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="150" width="230" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Applications" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffcccc;strokeColor=#36393d;fontFamily=Verdana;fontStyle=1;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="190" width="210" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="5" target="6">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="385" y="425" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="Host program" style="whiteSpace=wrap;strokeWidth=2;fillColor=#cce5ff;strokeColor=#36393d;fontFamily=Verdana;fontStyle=1;fontSize=19;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="300" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Host kernel" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Verdana;fontStyle=1;fontSize=21;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="400" width="230" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=block;startFill=1;" edge="1" parent="1" source="2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="384.5" y="260" as="sourcePoint"/>
+                        <mxPoint x="385" y="300" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Verdana; font-size: 17px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 700; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Host-defined APIs&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="250" width="220" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

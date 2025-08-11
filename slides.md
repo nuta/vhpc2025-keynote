@@ -37,17 +37,9 @@ layout: two-cols-header
 
 # Hardware-assisted virtualization
 
-::left::
+- Intel VT, AMD SVM, Arm VHE, RISC-V H extension...
 
-- Intel VT
-- AMD SVM
-- Arm Virtualization Host Extensions
-- RISC-V H extension
-
-::right::
-
-TODO: image here
- 
+![](./diagrams/intel-vt.svg)
 
 ---
 layout: center
@@ -78,7 +70,7 @@ try {
 
 # Try-catch pattern + continuation
 
-Let's assume that we have a `resume` callback:
+- Let's assume that we have a `resume` callback:
 
 ```ts
 try {
@@ -117,6 +109,12 @@ for (;;) {
     }
 }
 ```
+
+---
+
+# Hypervisors are the `catch` block (mostly)
+
+TODO: diagram
 
 ---
 
@@ -223,6 +221,8 @@ layout: cover
 - A new guest kernel written in Go emulates Linux.
 - Guest ↔︎ host interface is narrower than running containers directly.
 
+![](./diagrams/gvisor.svg)
+
 gVisor: https://github.com/google/gvisor
 
 ---
@@ -233,6 +233,8 @@ gVisor: https://github.com/google/gvisor
 - Uses hardware-assisted virtualization as an isolation boundary.
 - Fast cold start time (1-2 ms).
 - `Out32` to trigger VM exit.
+
+![](./diagrams/hyperlight.svg)
 
 Hyperlight: https://github.com/hyperlight-dev/hyperlight
 
@@ -260,19 +262,18 @@ layout: two-cols-header
 
 :: right ::
 
-```
-walltime
-puts
-poll
-blkread
-blkwrite
-netwrite
-netread
-halt
-
-blkinfo (deprecated)
-netinfo (deprecated)
-```
+| Hypercalls | System calls |
+| --- | --- |
+| `walltime` | `clock_gettime` |
+| `puts`  | `write(stdout)` |
+| `poll` | `ppoll` |
+| `blkread` | `pread64` |
+| `blkwrite` | `pwrite64` |
+| `netwrite` | `write` |
+| `netread` | `read` |
+| `halt` | `exit_group` |
+| `blkinfo` (deprecated) | |
+| `netinfo` (deprecated) | |
 
 <!-- Unikernels as Processes: https://doi.org/10.1145/3267809.3267845 -->
 
@@ -301,14 +302,26 @@ layout: cover
 
 # What's coming next? (my ideas)
 
+- Higher-level, rich hypervisor interface!
+
 ---
 
 # Virtio alternatives: Higher-level hypercalls
 
 - Virtio is a generic queue + notification mechanism.
-- Good fit for virtual devices.
+  - Good fit for virtual devices.
 - What if we port Foreign Function Interface techniques to hypervisors?
   - Zero-copy data transfer, etc.
+
+---
+
+# Virtio-tcp & udp
+
+- File system is abstracted as virtio-fs.
+- What about network?
+- What if hypervisor provides TCP/UDP sockets as a virtio device?
+- **Challenge:** How to integrate with existing TCP/IP stacks?
+- Related work: libkrun's *"Transparent Socket Impersonation"*
 
 ---
 

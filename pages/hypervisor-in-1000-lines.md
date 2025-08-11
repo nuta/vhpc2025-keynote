@@ -15,7 +15,7 @@ layout: cover
 
 <br>
 
-- **Note:** Details are omitted for brevity.
+- **Note:** Details are omitted for brevity. I'll focus on the overview.
 
 ---
 
@@ -167,11 +167,11 @@ static GUEST_MEMORY: GuestMemory = GuestMemory::new();
 // Verify the Linux image format...
 assert!(is_valid_riscv_image(LINUX_BIN));
 
-// Allocate memory region, copy the kernel image into it,
-// and map it to the guest page table.
-GUEST_MEMORY.add_region(
-    GuestAddr(GUEST_BASE_ADDR), GUEST_MEMORY_SIZE, LINUX_BIN,
-);
+// Allocate memory region and map it to the guest page table.
+let buf: &mut [u8] = GUEST_MEMORY.allocate(GUEST_BASE_ADDR, GUEST_MEMORY_SIZE);
+
+// Copy the kernel image into the allocated region.
+buf.copy_from_slice(LINUX_BIN);
 ```
 
 ---
@@ -251,12 +251,7 @@ enum Scause {
 }
 
 fn handle_trap() -> ! {
-    match read_csr!(scause) {
-        Scause::EnvCallFromVSMode => {
-            handle_ecall();
-            VCPU.pc += 4; // Skip the ecall instruction.
-        }
-    }
+    /* Handle VM exits here! */
 
     VCPU.enter_guest();
 }
@@ -264,11 +259,21 @@ fn handle_trap() -> ! {
 
 ---
 
-# VM Exit (1/3): Hypervisor call
+# VM Exit (1/2): Hypervisor call
 
 ```rs
-fn handle_ecall() {
-    ... // TODO: putchar here
+match read_csr!(scause) {
+    Scause::EnvCallFromVSMode => {
+        match VCPU.a7    /* SBI extension ID */ {
+            1 => {
+                // Console Putchar (EID=1)
+                let ch = VCPU.a0 as u8 as char;
+                print!("{}", ch);
+            }
+            _ => panic!("unsupported SBI extension: {}", eid),
+        }
+        VCPU.pc += 4; // Skip the ecall instruction.
+    }
 }
 ```
 
@@ -276,20 +281,27 @@ fn handle_ecall() {
 
 ---
 
-# VM Exit (2/3): Host interrupts
-
-TODO:
+# VM Exit (2/2): Memory-mapped I/O
 
 ```rs
-```
+match read_csr!(scause) {
+    Scause::StoreGuestPageFault => {
+        let (inst_len, rs, guest_addr) = parse_fault_info(); // TODO:
 
----
-
-# VM Exit (3/3): Memory-mapped I/O
-
-TODO:
-
-```rs
+        // Read the register value.
+        let value = match rs {
+            1 => VCPU.ra,
+            2 => VCPU.sp,
+            ...
+        };
+        if is_virtio_blk_range(guest_addr) {
+            handle_virtio_blk_mmio(guest_addr, value);
+        } else {
+            panic!("unexpected write: {:#x}", guest_addr);
+        }
+        VCPU.pc += inst_len; // Skip the load/store instruction.
+    }
+}
 ```
 
 ---

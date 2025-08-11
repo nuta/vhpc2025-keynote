@@ -1,0 +1,43 @@
+<mxfile host="65bd71144e">
+    <diagram name="Page-1" id="6ieUgSd7lXa0befN1dsf">
+        <mxGraphModel dx="771" dy="1211" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="dt5SGqenpm2Mk54ZUJxN-23" value="Applications" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffcccc;strokeColor=#36393d;fontFamily=Verdana;fontStyle=1;fontSize=21;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="290" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="dt5SGqenpm2Mk54ZUJxN-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="dt5SGqenpm2Mk54ZUJxN-24" target="dt5SGqenpm2Mk54ZUJxN-26" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="dt5SGqenpm2Mk54ZUJxN-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;endArrow=block;endFill=1;startArrow=block;startFill=1;" parent="1" source="dt5SGqenpm2Mk54ZUJxN-24" target="dt5SGqenpm2Mk54ZUJxN-27" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="dt5SGqenpm2Mk54ZUJxN-24" value="Sentry" style="whiteSpace=wrap;strokeWidth=2;fillColor=#cce5ff;strokeColor=#36393d;fontFamily=Verdana;fontStyle=1;fontSize=19;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="290" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="dt5SGqenpm2Mk54ZUJxN-26" value="Linux kernel" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Verdana;fontStyle=1;fontSize=21;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="425" width="380" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="dt5SGqenpm2Mk54ZUJxN-27" value="Gofer&#10;(FS proxy)" style="whiteSpace=wrap;strokeWidth=2;fillColor=#cdeb8b;strokeColor=#36393d;fontFamily=Verdana;fontStyle=1;fontSize=19;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="282.5" width="150" height="95" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="KVM" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Verdana;fontStyle=1;fontSize=19;" vertex="1" parent="1">
+                    <mxGeometry x="190" y="425" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;curved=1;" edge="1" parent="1" target="dt5SGqenpm2Mk54ZUJxN-24">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="196" y="369.9999999999998" as="sourcePoint"/>
+                        <mxPoint x="313.5" y="369.9999999999998" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="210" y="370"/>
+                            <mxPoint x="210" y="430"/>
+                            <mxPoint x="290" y="430"/>
+                            <mxPoint x="290" y="370"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
