@@ -332,9 +332,13 @@ layout: cover
 
 # Strongly-isolated JavaScript
 
-- V8 isolates are popular isolation boundary in multi-tenant JavaScript-powered clouds (e.g. Cloudflare Workers and Deno Deploy).
-- However, V8 isolates are not secure boundary.
-- What if we use a thin hypervisor as a secure boundary, deeply integrated with JavaScript JIT engine?
+- Why JavaScript?
+  - **Modern web frameworks are creeping into the backend world**
+  - E.g. React Server Components.
+- **V8 isolates are popular isolation in multi-tenant JavaScript clouds.**
+  - E.g. Cloudflare Workers and Deno Deploy
+  - However, V8 isolates are not a secure isolation boundary.
+- What if we use **a thin hypervisor as a secure boundary**, deeply integrated with JavaScript JIT engine?
 
 ---
 
