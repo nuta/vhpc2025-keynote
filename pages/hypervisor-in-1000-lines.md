@@ -158,6 +158,7 @@ pub struct GuestMemory {
 
 ---
 
+
 # Load the guest kernel image
 
 ```rs

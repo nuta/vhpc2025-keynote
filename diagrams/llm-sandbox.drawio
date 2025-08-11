@@ -1,0 +1,46 @@
+<mxfile host="65bd71144e">
+    <diagram id="rnHosyLAnT5S780lOPQO" name="Page-1">
+        <mxGraphModel dx="828" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="Sandbox" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Verdana;fontStyle=1;fontSize=21;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="250" width="280" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="file system" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Verdana;fontStyle=1;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="410" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Bash / Python / Node.js" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Verdana;fontStyle=1;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="310" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="🤖 LLM" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fontSize=21;fontFamily=Verdana;fillColor=#ffcccc;strokeColor=#36393d;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="370" width="170" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Guest kernel" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Verdana;fontStyle=1;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="360" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;exitX=0.88;exitY=0.25;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="11">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="290" y="260" as="sourcePoint"/>
+                        <mxPoint x="480" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="&lt;span style=&quot;font-family: Verdana; font-weight: 700;&quot;&gt;Generated code&lt;br&gt;(potentially harmful)&lt;br&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="228" y="298" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="500" y="460" as="sourcePoint"/>
+                        <mxPoint x="500" y="490" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="&lt;span style=&quot;font-family: Verdana; font-weight: 700;&quot;&gt;🔥 Attacks / exploits&lt;br&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="495" y="460" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Hypervisor" style="whiteSpace=wrap;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Verdana;fontStyle=1;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="510" width="280" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

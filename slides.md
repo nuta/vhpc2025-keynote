@@ -338,10 +338,12 @@ layout: cover
 
 ---
 
-# AI agent sandboxing
+# AI agent sandboxing (off-topic)
 
 - We can't trust what LLMs do (e.g. it might do `rm -rf /`).
 - How should LLMs control the sandboxed environment?
+
+![](./diagrams/llm-sandbox.svg)
 
 ---
 
