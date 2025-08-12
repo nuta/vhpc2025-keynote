@@ -291,9 +291,11 @@ layout: two-cols-header
 - Both define an interface (hypercalls / foreign function interface).
 - Both (sometimes) need a secure isolation to run untrusted code.
 
+TODO: diagram
+
 ---
 
-# Hardware-assited virtualization is not only for VMs
+# That is ... virtualization is not only for VMs!
 
 - It's a hardware-assited `try-catch` mechanism.
 - The guest ↔︎ host interface matters.
@@ -306,9 +308,9 @@ From this perspective, don't Hyperlight, gVisor, Noah sound familar to you?
 layout: cover
 ---
 
-# What's coming next? (my ideas)
+What's coming next?
 
-- The guest ↔︎ host interface goes higher!
+# The guest ↔︎ host interface goes higher!
 
 ---
 
@@ -334,7 +336,7 @@ layout: cover
 
 - Why JavaScript?
   - **Modern web frameworks are creeping into the backend world**
-  - E.g. React Server Components.
+  - Aka. Backend for Frontend (BFF) architecture.
 - **V8 isolates are popular isolation in multi-tenant JavaScript clouds.**
   - E.g. Cloudflare Workers and Deno Deploy
   - However, V8 isolates are not a secure isolation boundary.
@@ -342,14 +344,15 @@ layout: cover
 
 ---
 
-# AI agent sandboxing (off-topic)
+# AI agent sandboxing: LLM↔︎guest interface design
 
 - We can't trust what LLMs do (e.g. it might do `rm -rf /`).
+- Hot topic in industry: especially for coding agents.
 - How should LLMs control the sandboxed environment?
 
 ![](./diagrams/llm-sandbox.svg)
 
----
+<!-- ---
 
 # Efficient VM snapshotting
 
@@ -358,13 +361,13 @@ layout: cover
 - Applications are super slow to start up (> 100ms), and VM snapshots solve this.
 - However, VM snapshot images are not so small (> 100MB).
 - How should we manage VM snapshots efficiently?
-  - Stargz Snapshotter (lazy pulling).
+  - Stargz Snapshotter (lazy pulling). -->
 
 ---
 
 # Invest in user (*"developer"*) experience
 
-- Hypervisor as a library - use a VM like a subprocess.
-- Strongly-isolated CGI - spawn lightweight VM per HTTP request, like we use to do in `cgi-bin`.
+- **Hypervisor as a library:** use a VM like a subprocess.
+- **Strongly-isolated CGI:** spawn lightweight VM per HTTP request, like we use to do in `cgi-bin`.
 
 **No novel technology here: just change how your hypervisor look like!**

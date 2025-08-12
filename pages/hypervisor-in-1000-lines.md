@@ -2,6 +2,8 @@
 layout: cover
 ---
 
+Let's observe the "catch" pattern with ...
+
 # Writing a hypervisor from scratch (super quick walkthrough!)
 
 ---
@@ -41,6 +43,8 @@ fn main() -> ! {
 ---
 
 # Putchar via SBI
+
+- Call the firmware's serial driver like BIOS in x86.
 
 ```rs
 fn sbi_putchar(ch: u8) {
