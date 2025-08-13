@@ -412,10 +412,42 @@ What's coming next?
 <img src="./diagrams/llm-sandbox.svg" class="ml-30 scale-95" />
 
 ---
+layout: two-cols-header
+---
 
 # Invest in user (*"developer"*) experience
 
-- **Hypervisor as a library:** use a VM like a subprocess.
-- **Strongly-isolated CGI:** spawn lightweight VM per HTTP request, like we use to do in `cgi-bin`.
+- Example: Hypervisor as a library<sup>5</sup> - use a VM like a subprocess.
+- No novel tech here: just change how your hypervisor look like!
 
-**No novel technology here: just change how your hypervisor look like!**
+<style>
+code {
+  font-size: 1.2em;
+}
+</style>
+
+<div class="text-xl mt-4">
+❌ Exposing implementation details of hypervisor:
+</div>
+
+```
+qemu-system-x86_64 -kernel guest.bin -hda cowsay.img -serial stdio ...
+```
+
+<div class="text-xl mt-4">
+✅ Provide a higher-level convenient interface:
+</div>
+
+```rs
+use starina_linux::Command;
+
+let cmd = Command::new("/bin/cowsay")
+    .stdin(stdin)
+    .stdout(stdout)
+    .spawn()
+    .expect("failed to run cowsay in Linux microVM");
+```
+
+<div class="text-center text-gray-700 text-lg mt-4">
+<sup>5</sup> https://seiya.me/blog/hypervisor-as-a-library
+</div>
