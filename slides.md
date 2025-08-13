@@ -39,15 +39,18 @@ layout: two-cols-header
 
 - Intel VT, AMD SVM, Arm VHE, RISC-V H extension...
 
-![](./diagrams/intel-vt.svg)
+<img src="./diagrams/intel-vt.svg" class="my-8 mx-auto" />
 
 ---
 layout: center
 ---
 
+<div class="text-center">
 Intel VT/AMD SVM/Arm VHE/RISC-V H are ...
 
-# hardware-assisted `try-catch` (with continuation)
+  <h1 class="my-4 font-bold"> hardware-assisted try-catch <br><span class="text-2xl">(with continuation)</span> </h1>
+
+</div>
 
 ---
 
@@ -137,6 +140,15 @@ for (;;) {
 
 # Linux KVM API (simplified)
 
+
+<style>
+code {
+  font-size: 1.4em;
+}
+</style>
+
+- FreeBSD bhyve uses a similar interface (`ioctl`).
+
 ```c
 guest_memory = mmap(...);                   // 1. Prepare memory
 memcpy(guest_memory, ...);                  // 2. Load the program
@@ -154,11 +166,17 @@ for (;;) {
     }
 }
 ```
-- FreeBSD bhyve uses a similar interface (`ioctl`).
-
 ---
 
 # Fuchsia API (simplified)
+
+- Similar to Linux KVM API.
+
+<style>
+code {
+  font-size: 1.3em;
+}
+</style>
 
 ```c
 zx_guest_create(..., &guest, &vmar);
@@ -183,12 +201,18 @@ for (;;) {
 
 # seL4 libvmm API (simplified)
 
+- It's in a callback style, but is the same flow.
+
+<style>
+code {
+  font-size: 1.6em;
+}
+</style>
+
 ```c
 void init(void) {
-  // 1-2. Prepare memory and load the program
-  linux_setup_images(...);
-  // 3-4. Initialize vCPU and start it
-  guest_start();
+  linux_setup_images(...); // 1-2. Prepare memory and load the program
+  guest_start();           // 3-4. Initialize vCPU and start it
 }
 
 // 5. Handle exit and go back to guest mode
@@ -221,44 +245,56 @@ layout: cover
 
 ---
 
-# gVisor: Hypervisor as a container sandbox
+# gVisor<sup>1</sup>: Hypervisor as a container sandbox
 
 - A VMM for running multi-tenant Linux containers.
 - A new guest kernel written in Go emulates Linux.
 - Guest ↔︎ host interface is narrower than running containers directly.
 
-![](./diagrams/gvisor.svg)
+<img src="./diagrams/gvisor.svg" class="my-8 mx-auto scale-120" />
 
-gVisor: https://github.com/google/gvisor
-
----
-
-# Hyperlight: Hypervisor as a function sandbox
-
-- A VMM for running multi-tenant functions (vs. containers in gVisor).
-- Uses hardware-assisted virtualization as an isolation boundary.
-- Fast cold start time (1-2 ms).
-- `Out32` to trigger VM exit.
-
-![](./diagrams/hyperlight.svg)
-
-Hyperlight: https://github.com/hyperlight-dev/hyperlight
-
-----
-
-# Noah: Hypervisor for system call emulation
-
-- Run applications in guest mode **w/o guest kernel**.
-- VMM intercepts system calls and emulates them.
-- Hypervisor as a system call hook.
-
-https://doi.org/10.1145/3381052.3381327
+<div class="text-center text-gray-700 text-lg">
+<sup>1</sup> https://github.com/google/gvisor
+</div>
 
 ---
 layout: two-cols-header
 ---
 
-# Nabla Containers: Higher-level hypervisor interface
+# Hyperlight<sup>2</sup>: Hypervisor as a function sandbox
+
+:: left ::
+
+- VMM for multi-tenant functions.
+  - vs. "containers" in gVisor.
+- Hardware-assisted virtualization as an isolation boundary.
+- Application-specific hypercalls.
+
+:: right ::
+
+<img src="./diagrams/hyperlight.svg" class="my-8 ml-16" />
+
+<div class="text-center text-gray-700 text-lg">
+<sup>2</sup> https://github.com/hyperlight-dev/hyperlight
+</div>
+
+----
+
+# Noah<sup>3</sup>: Hypervisor for system call emulation
+
+- Run applications in guest mode **w/o guest kernel**.
+- VMM intercepts system calls and emulates them.
+- Hypervisor as a system call hook.
+
+<div class="text-center text-gray-700 text-lg">
+<sup>3</sup> https://doi.org/10.1145/3381052.3381327
+</div>
+
+---
+layout: two-cols-header
+---
+
+# Nabla Containers<sup>4</sup>: Higher-level hypervisor interface
 
 :: left ::
 
@@ -281,7 +317,9 @@ layout: two-cols-header
 | `blkinfo` (deprecated) | |
 | `netinfo` (deprecated) | |
 
-<!-- Unikernels as Processes: https://doi.org/10.1145/3267809.3267845 -->
+<div class="text-center text-gray-700 text-lg">
+<sup>4</sup> Unikernels as Processes: https://doi.org/10.1145/3267809.3267845
+</div>
 
 ---
 
@@ -308,9 +346,10 @@ From this perspective, don't Hyperlight, gVisor, Noah sound familar to you?
 layout: cover
 ---
 
+<div class="text-center">
 What's coming next?
-
-# The guest ↔︎ host interface goes higher!
+<h1 class="my-4 font-bold">The guest ↔︎ host interface goes higher!</h1>
+</div>
 
 ---
 
@@ -350,18 +389,7 @@ What's coming next?
 - Hot topic in industry: especially for coding agents.
 - How should LLMs control the sandboxed environment?
 
-![](./diagrams/llm-sandbox.svg)
-
-<!-- ---
-
-# Efficient VM snapshotting
-
-- Cold start time is a key performance metric in multi-tenant hypervisors.
-- VMM and Linux kernel are pretty fast (< 20ms) to boot up.
-- Applications are super slow to start up (> 100ms), and VM snapshots solve this.
-- However, VM snapshot images are not so small (> 100MB).
-- How should we manage VM snapshots efficiently?
-  - Stargz Snapshotter (lazy pulling). -->
+<img src="./diagrams/llm-sandbox.svg" class="ml-30 scale-95" />
 
 ---
 

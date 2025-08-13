@@ -2,9 +2,10 @@
 layout: cover
 ---
 
-Let's observe the "catch" pattern with ...
-
-# Writing a hypervisor from scratch (super quick walkthrough!)
+<div class="text-center">
+  <h1 class="my-4 font-bold"> Writing a hypervisor<br> from scratch</h1>
+  <br><span class="text-4xl">(super quick walkthrough!)</span>
+</div>
 
 ---
 
@@ -100,7 +101,12 @@ code {
 }
 </style>
 
+- Unlocks vector (`Vec`), `String`, `LinkedList`, `HashMap`, and more.
+
 ```rs
+#[global_allocator]
+pub static GLOBAL_ALLOCATOR: BumpAllocator = BumpAllocator { ... };
+
 pub BumpAllocator {
     next: usize,
     end: usize,
@@ -114,12 +120,7 @@ unsafe impl GlobalAlloc for BumpAllocator {
         start as *mut u8
     }
 }
-
-#[global_allocator]
-pub static GLOBAL_ALLOCATOR: BumpAllocator = BumpAllocator { ... };
 ```
-
-- Unlocks vector (`Vec`), `String`, `LinkedList`, `HashMap`, and more.
 
 ---
 layout: two-cols-header
@@ -143,13 +144,13 @@ struct Region {
 /// Guest RAM regions.
 pub struct GuestMemory {
     regions: Vec<Region>,
-    page_table: GuestPageTable, // TODO:
+    page_table: GuestPageTable,
 }
 ```
 
 ::right::
 
-![](../diagrams/guest-memory.svg)
+<img src="../diagrams/guest-memory.svg" class="ml-30 scale-130 my-10" />
 
 ---
 
@@ -158,10 +159,9 @@ pub struct GuestMemory {
 - Maps guest-physical addresses to host-physical addresses.
 - Very similar to typical multi-level page tables (like x86-64/Arm).
 
-![](../diagrams/guest-page-table.svg)
+<img src="../diagrams/guest-page-table.svg" class="-my-15 scale-75 mx-auto" />
 
 ---
-
 
 # Load the guest kernel image
 
@@ -183,24 +183,25 @@ buf.copy_from_slice(LINUX_BIN);
 
 # Enter the guest mode
 
+- Prepare per-vCPU state, and switch to the guest mode.
+
+<style>
+code {
+  font-size: 1.2em;
+}
+</style>
+
 ```rs
 static mut VCPU: VCpu; // hstatus, pc, sp, a0, a1, ...
 
 impl VCpu {
-    fn new() -> VCpu {
-        VCpu {
-            hstatus: (2 << 32) /* 64-bit mode */ | (1 << 7) /* TODO: SPV */
-            ...
-        }
-    }
-
     pub fn enter_guest() {
         unsafe {
             asm!(
                 "csrw hstatus, {hstatus}",
                 "csrw sepc, {sepc}",
                 "csrw hgatp, {hgatp}",
-                /* omitted: restore general-purpose registers from VCPU */
+                /* ... omitted: restore general-purpose registers from `VCPU` ... */
                 "sret", // IRET in x86-64
                 hstatus = in(reg) VCPU.hstatus,       // CPU flags
                 sepc = in(reg) GUEST_BASE_ADDR,       // Guest entrypoint
@@ -210,7 +211,6 @@ impl VCpu {
     }
 }
 ```
-
 ---
 
 # Handle VM exits (1/2)
@@ -243,21 +243,24 @@ fn main() -> ! {
 
 <style>
 code {
-  font-size: 1.4em;
+  font-size: 1.65em;
 }
 </style>
 
 ```rs
-macro_rules! read_csr { ... } // Macro: Read a CSR
+// macro: Read a CSR
+macro_rules! read_csr { ... }
 
+// Trap reasons
 enum Scause {
-    EnvCallFromVSMode, // "ecall" from VS mode (guest kernel)
-    ...
+    EnvCallFromVSMode,   // "ecall" from VS mode (guest kernel)
+    StoreGuestPageFault, // Page fault in the guest mode
 }
 
+/// Trap handler.
 fn handle_trap() -> ! {
-    /* Handle VM exits here! */
-
+    // TODO: Handle VM exits here!
+    // Resume the guest mode after handling the exit.
     VCPU.enter_guest();
 }
 ```
@@ -265,6 +268,8 @@ fn handle_trap() -> ! {
 ---
 
 # VM Exit (1/2): Hypervisor call
+
+- Similar to system calls, but calls hypervisor functions (SBI in RISC-V).
 
 ```rs
 match read_csr!(scause) {
@@ -282,25 +287,27 @@ match read_csr!(scause) {
 }
 ```
 
-- Similar to system calls, but calls hypervisor functions (SBI in RISC-V).
-
 ---
 
 # VM Exit (2/2): Memory-mapped I/O
 
+<style>
+code {
+  font-size: 1.5em;
+}
+</style>
+
 ```rs
 match read_csr!(scause) {
     Scause::StoreGuestPageFault => {
-        let (inst_len, rs, guest_addr) = parse_fault_info(); // TODO:
-
-        // Read the register value.
-        let value = match rs {
+        let (inst_len, rs, guest_addr) = decode_fault_details(); // Read CSRs here
+        let value = match rs { // Read the register value
             1 => VCPU.ra,
             2 => VCPU.sp,
             ...
         };
-        if is_virtio_blk_range(guest_addr) {
-            handle_virtio_blk_mmio(guest_addr, value);
+        if is_virtio_blk_range(guest_addr) { // Is it in a MMIO region?
+            handle_virtio_blk_mmio(guest_addr, value); // Handle it as a MMIO if so
         } else {
             panic!("unexpected write: {:#x}", guest_addr);
         }
