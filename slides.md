@@ -129,6 +129,12 @@ for (;;) {
 
 # Hypervisors are the `catch` block (mostly)
 
+<style>
+thead th {
+  font-weight: 600;
+}
+</style>
+
 | JavaScript | Hardware-assisted virtualization |
 | --- | --- |
 | `try` block | guest mode |
@@ -302,7 +308,24 @@ layout: two-cols-header
 - Q: Do we really need virtual "devices" in guest?
 - Hypercalls look more like system calls, not devices.
 
+
+<div class="text-center text-gray-700 text-lg mt-10">
+<sup>4</sup> Unikernels as Processes: https://doi.org/10.1145/3267809.3267845
+</div>
+
 :: right ::
+
+<style>
+thead th {
+  font-weight: 600;
+  font-size: 0.8em;
+}
+
+tbody tr td {
+  padding: 2px;
+  font-size: 0.8em;
+}
+</style>
 
 | Hypercalls | System calls |
 | --- | --- |
@@ -317,20 +340,17 @@ layout: two-cols-header
 | `blkinfo` (deprecated) | |
 | `netinfo` (deprecated) | |
 
-<div class="text-center text-gray-700 text-lg">
-<sup>4</sup> Unikernels as Processes: https://doi.org/10.1145/3267809.3267845
-</div>
 
 ---
 
 # (hardware-assisted) hypervisors look like interpreters
 
-- Both run a program in a different world.
-- Both define an interface (hypercalls / foreign function interface).
-- Both (sometimes) need a secure isolation to run untrusted code.
+- Both run a **program in a different world**.
+- Both define **an interface** (hypercalls / foreign function interface).
+- Both (sometimes) need **a secure isolation** to run untrusted code.
 
-TODO: diagram
-
+<img src="./diagrams/hv-catch.svg" class="-my-3 mx-auto" />
+<img src="./diagrams/js-catch.svg" class="my-6 mx-auto" />
 ---
 
 # That is ... virtualization is not only for VMs!
