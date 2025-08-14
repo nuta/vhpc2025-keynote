@@ -389,6 +389,8 @@ What's coming next?
 - **Challenge:** How to integrate with existing TCP/IP stacks?
 - Related work: libkrun's *"Transparent Socket Impersonation"*
 
+<img src="./diagrams/virtio-tcp.svg" class="my-2 mx-auto scale-100" />
+
 ---
 
 # Strongly-isolated JavaScript
