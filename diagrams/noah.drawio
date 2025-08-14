@@ -1,0 +1,45 @@
+<mxfile host="65bd71144e">
+    <diagram id="z7V8neYZP30H3ngDHUo_" name="Page-1">
+        <mxGraphModel dx="910" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="Linux binary&#10;(w/o kernel)" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffcccc;strokeColor=#36393d;fontFamily=Verdana;fontStyle=1;fontSize=19;" vertex="1" parent="1">
+                    <mxGeometry x="140" y="290" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="424.9999999999998" y="425" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="macOS / Windows&#10;process" style="whiteSpace=wrap;strokeWidth=2;fillColor=#cce5ff;strokeColor=#36393d;fontFamily=Verdana;fontStyle=1;fontSize=19;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="290" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="macOS / Windows kernel" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Verdana;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="425" width="270" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="VMM" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Verdana;fontStyle=1;fontSize=19;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="425" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;endArrow=block;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;curved=1;" edge="1" parent="1" target="6">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="196" y="369.9999999999998" as="sourcePoint"/>
+                        <mxPoint x="313.5" y="369.9999999999998" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="210" y="370"/>
+                            <mxPoint x="210" y="430"/>
+                            <mxPoint x="300" y="430"/>
+                            <mxPoint x="300" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Verdana; font-size: 19px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 700; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Trap&amp;nbsp; Linux syscalls&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="395" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 19px;&quot;&gt;&lt;b&gt;Use host OS syscalls&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="380" width="225" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

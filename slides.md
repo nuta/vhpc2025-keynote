@@ -288,12 +288,14 @@ layout: two-cols-header
 
 # Noah<sup>3</sup>: Hypervisor for system call emulation
 
-- Run applications in guest mode **w/o guest kernel**.
-- VMM intercepts system calls and emulates them.
+- Linux binary compatibility using a hypervisor.
+- Linux binaries run in the guest mode without a guest kernel.
 - Hypervisor as a system call hook.
 
+<img src="./diagrams/noah.svg" class="my-8 mx-auto scale-120" />
+
 <div class="text-center text-gray-700 text-lg">
-<sup>3</sup> https://doi.org/10.1145/3381052.3381327
+<sup>3</sup> Takaya Saeki, et al. "A robust and flexible operating system compatibility architecture" https://doi.org/10.1145/3381052.3381327
 </div>
 
 ---
@@ -310,7 +312,7 @@ layout: two-cols-header
 
 
 <div class="text-center text-gray-700 text-lg mt-10">
-<sup>4</sup> Unikernels as Processes: https://doi.org/10.1145/3267809.3267845
+<sup>4</sup> Dan Williams, et al. "Unikernels as Processes" https://doi.org/10.1145/3267809.3267845
 </div>
 
 :: right ::
@@ -349,8 +351,8 @@ tbody tr td {
 - Both define **an interface** (hypercalls / foreign function interface).
 - Both (sometimes) need **a secure isolation** to run untrusted code.
 
-<img src="./diagrams/hv-catch.svg" class="-my-3 mx-auto" />
-<img src="./diagrams/js-catch.svg" class="my-6 mx-auto" />
+<img src="./diagrams/hv-catch.svg" class="-my-5 mx-auto scale-90" />
+<img src="./diagrams/js-catch.svg" class="my-2 mx-auto scale-90" />
 ---
 
 # That is ... virtualization is not only for VMs!
