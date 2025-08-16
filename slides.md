@@ -455,3 +455,21 @@ let cmd = Command::new("/bin/cowsay")
 <div class="text-center text-gray-700 text-lg mt-4">
 <sup>5</sup> https://seiya.me/blog/hypervisor-as-a-library
 </div>
+
+---
+layout: cover
+---
+
+# Conclusion
+
+---
+
+# Conclusion
+
+- Hardware-assisted virtualization is not only for VMs.
+- Hypervisors are climbing to higher and higher abstraction levels:
+  1. Emulating real hardware devices (e1000 ethernet card)
+  2. Emulating virtual hardware devices (Virtio)
+  3. Higher-level interfaces (system calls)
+  4. Even higher-level interfaces (application-specific hypercalls)
+  5. What's next?
