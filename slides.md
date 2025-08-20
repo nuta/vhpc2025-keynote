@@ -472,4 +472,4 @@ layout: cover
   2. Emulating virtual hardware devices (Virtio)
   3. Higher-level interfaces (system calls)
   4. Even higher-level interfaces (application-specific hypercalls)
-  5. What's next?
+- What's next?
