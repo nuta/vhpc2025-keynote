@@ -145,15 +145,23 @@ TODO:
   3. Initialize the vCPU state.
   4. Enter the guest mode.
   5. Handle VM exits and go back to the guest mode.
+
 - This means that the guest keeps running until it needs an assistance from the hypervisor.
+- In other words, hypervisors are the `catch` block.
 
 # Hypervisors are the `catch` block (mostly)
 
-TODO:
+- Here's the flow of the hypervisor.
+- It enters guest, exit to the host, and the hypervisor catches the VM exit, and continue the guest.
+
+- This is similar to interpreters. In JavaScript, we run a program in a try block, the interpreter keeps running the program, and when the program can't continue, we catch an exception.
 
 # Hypervisors are the `catch` block (mostly)
 
-TODO:
+- That is, the guest mode is like a try block.
+- The hypervisor's trap handler is like a catch block.
+- VM exit can be considered as a throw.
+- And the details of VM exit are like the exception thrown by the guest.
 
 # Real-world virtualization APIs
 

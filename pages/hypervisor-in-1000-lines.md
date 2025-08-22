@@ -320,4 +320,4 @@ match read_csr!(scause) {
 
 # More on web!
 
-TODO:
+- Visit https://1000hv.seiya.me if you are interested in the complete contents :)
