@@ -142,15 +142,24 @@ TODO:
 
 # Linux KVM API
 
-TODO:
+- The first example is Linux KVM.
+- It's a file-based interface.
+- Open a special KVM file, do some ioctls to create virtual CPUs, run ioctl to enter the guest mode, and it returns when VM exits.
+- FreeBSD also has a similar interface.
 
 # Fuchsia API
 
-TODO:
+- The second example is Fuchsia, an operating system developed by Google.
+- It's capability-based, and have its own interface.
+- API names are different but the pattern is very similar to Linux KVM.
+- Initialize the guest memory, create virtual CPUs, enter the guest mode, and handle VM exits.
 
 # seL4 libvmm API
 
-TODO:
+- The third example is seL4, a microkernel-based operating system.
+- Unlike Linux KVM, seL4's vmm library API is callback-based.
+- Initialize the hypervisor in `init` function, and when VM exits, `fault` function is called, and do memory-mapped I/O emulation.
+- It looks different from KVM, but the pattern is the same: initialize, enter the guest mode, catch the VM exit, and continue.
 
 # Hypervisors are `catch` blocks (w/ continuation)
 
