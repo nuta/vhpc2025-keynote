@@ -143,6 +143,12 @@ thead th {
 | `error` | VM exit reason |
 
 ---
+layout: cover
+---
+
+# Real-world virtualization APIs
+
+---
 
 # Linux KVM API (simplified)
 

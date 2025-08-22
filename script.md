@@ -117,6 +117,104 @@ TODO:
 
 TODO:
 
+# A life of a hypervisor
+
+- Let's summarize what we've seen so far.
+- To put it simply in JavaScript, the life of a hypervisor looks like this.
+  1. Prepare guest memory.
+  2. Load the boot image.
+  3. Initialize the vCPU state.
+  4. Enter the guest mode.
+  5. Handle VM exits and go back to the guest mode.
+- This means that the guest keeps running until it needs an assistance from the hypervisor.
+
+# Hypervisors are the `catch` block (mostly)
+
+TODO:
+
+# Hypervisors are the `catch` block (mostly)
+
+TODO:
+
+# Real-world virtualization APIs
+
+- Let's look at some real-world virtualization APIs to observe the same try-catch pattern.
+
+# Linux KVM API
+
+TODO:
+
+# Fuchsia API
+
+TODO:
+
+# seL4 libvmm API
+
+TODO:
+
+# Hypervisors are `catch` blocks (w/ continuation)
+
+- We saw the following pattern in all APIs:
+  1. Initialization. Prepare guest memory and vCPUs.
+  2. Try. Enter the guest mode.
+  3. Catch. Handle an exception such as memory-mapped I/O emulation.
+  4. Continue. Go back to the guest mode.
+- TODO:
+- So hardware-assisted virtualization is not really about emulating hardware, or virtual machines. It's a generic mechanism to run a program in a different world.
+  - This means hardware-assisted virtualization has great potential to be applied to more areas, not only virtual machines.
+
+# The `try-catch` pattern in action
+
+- Next, let's look at some applications of this hardware-assisted try-catch, beyond virtual machines.
+
+# gVisor: Hypervisor as a container sandbox
+
+TODO:
+
+# Hyperlight: Hypervisor as a function sandbox
+
+TODO:
+
+# Noah: Hypervisor for system call emulation
+
+TODO:
+
+# Nabla Containers: Higher-level hypervisor interface
+
+TODO:
+
+# (hardware-assisted) hypervisors look like interpreters
+
+- To summarize, hardware-assisted virtualization is a generic mechanism to run a program in a different world.
+- This is similar to interpreters such as JavaScript and Python engines.
+ - Both have a different world.
+ - Both define a clear interface between the guest and the host.
+ - And Both also provides a secure isolation boundary to run untrusted code.
+
+# That is ... virtualization is not only for VMs!
+
+TODO:
+
+# What's coming next? - The guest ↔︎ host interface goes higher!
+
+TODO:
+
+# Virtio alternatives: Do we need a queue interface?
+
+TODO:
+
+# Higher-level interfaces in Virtio: virtio-tcp & udp
+
+TODO:
+
+# Strongly-isolated JavaScript
+
+TODO:
+
+# AI agent sandboxing: LLM↔︎guest interface design
+
+TODO:
+
 # Invest in user (*"developer"*) experience
 
 - This is the last slide. I've shown you some examples of higher-level interfaces like: new virtio, and new hypercalls.
@@ -137,3 +235,7 @@ TODO:
 - Investing in the user interface is key, and it's very hard than you anticipate.
 
 - I'm looking forward to seeing your next great hypervisor with a great user experience.
+
+# Conclusion
+
+TODO:
