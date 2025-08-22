@@ -259,7 +259,7 @@ enum Scause {
 
 /// Trap handler.
 fn handle_trap() -> ! {
-    // TODO: Handle VM exits here!
+    todo!("handle VM exit here!");
     // Resume the guest mode after handling the exit.
     VCPU.enter_guest();
 }
@@ -274,13 +274,13 @@ fn handle_trap() -> ! {
 ```rs
 match read_csr!(scause) {
     Scause::EnvCallFromVSMode => {
-        match VCPU.a7    /* SBI extension ID */ {
-            1 => {
-                // Console Putchar (EID=1)
-                let ch = VCPU.a0 as u8 as char;
-                print!("{}", ch);
-            }
-            _ => panic!("unsupported SBI extension: {}", eid),
+        let eid = VCPU.a7; // SBI extension ID
+        if eid == 1 {
+            // Console Putchar (EID=1)
+            let ch = VCPU.a0 as u8 as char;
+            print!("{}", ch);
+        } else {
+            panic!("unsupported SBI extension: {}", eid);
         }
         VCPU.pc += 4; // Skip the ecall instruction.
     }

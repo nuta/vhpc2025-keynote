@@ -78,11 +78,14 @@ TODO:
 - OK so we're ready for bare-metal Rust.
 - Let's go back to the hypervisor.
 - For hypervisor, the first thing would be to prepare guest memory space.
-- TODO:
+
+- Guest memory consists of regions.
+- Each region has the base guest address, the size, and the type of the region like: free RAM area that guest may use, or memory-mapped I/O area for virtual devices.
 
 # Guest page table
 
-- TODO:
+- To map the guest memory regions into the guest physical address space, we need a guest page table.
+- It's very similar to a page table, but instead of virtual address, it translates guest physical address.
 
 # Load the kernel image
 
@@ -99,19 +102,35 @@ TODO:
 
 # Handle VM eixsts (1/2)
 
-TODO:
+- So we're now in the guest mode.
+- CPU keeps executing instructions in the guest mode as usual, and when it needs an assistance from the hypervisor, it jumps to the hypervisor (or host) kernel, which is called "vm exit".
+
+- In RISC-V, VM exit is implemented as a trap. `stvec` register contains the trap handler address, and the handler will be called when a VM exit occurs.
+- The trap handler saves the guest state such as general-purpose registers, and jumps to the handler function.
 
 # Handle VM eixsts (2/2)
 
-TODO:
+- In this slide, few things are defined for later slides.
+- The main job of the trap handler is to handle the VM exit.
+- In this step, the handler does nothing but panics. But in general, it receives the details of the VM exit, and do something with it, and continue the guest again.
+
+- So how VM exit handling looks like?
 
 # VM Exit (1/2): Hypervisor call
 
-TODO:
+- The first example is a hypervisor call.
+- This example is in RISC-V, but the pattern is the same for other CPUs.
+- `scause` register contains the reason of the trap, or VM exit.
+- We can use it to detect the hypervisor call.
+- Here we emulate the console putchar interface in SBI.
+- And once it's done, update the program counter to continue from the next instruction, and go back to the guest mode.
 
 # VM Exit (2/2): Memory-mapped I/O
 
-TODO:
+- Memory-mapped I/O is similar to hypervisor call, but it's more complex.
+- Memory-mapped I/O appears as a page fault in the trap handler.
+- When the guest page fault happens, the trap handler receives more details of the page fault, such as guest address, and the instruction at that time.
+- Then, the handler search the guest memory regions to find the corresponding region, if the fault address is in a memory-mapped I/O area, it emulates the device.
 
 # More on Web!
 
