@@ -205,19 +205,40 @@ TODO:
 
 # gVisor: Hypervisor as a container sandbox
 
-TODO:
+- gVisor is a hypervisor designed for running Linux containers in a strong isolation for multi-tenancy.
+- gVisor supports a few different sandboxing mechanisms, and one of them is a KVM based isolation.
+- In Guest mode, gVisor runs its own applicaiton kernel written in Go. It's Linux-compat, but it's not a full Linux kernel.
+- By having a KVM, system calls are trapped and emulated.
+- This reduces the attack surface.
 
 # Hyperlight: Hypervisor as a function sandbox
 
-TODO:
+- Hyperlight is another sandbox solution by Microsoft.
+- It's similar to gVisor, but it's designed for functions, not Linux containers.
+
+- Hyperlight provides a strong isolation boundary for multi-tenant services.
+- It's also based on virtualization technology, like Linux KVM.
+
+- gVisor implements Linux system calls, but in Hyperlight, the host provides application-specific hypercalls.
 
 # Noah: Hypervisor for system call emulation
 
-TODO:
+- The next example is Noah.
+- Noah is a Linux system call emulator based on the virtualization technology.
+- In guest mode, it doesn't have a guest kernel. Instead, system calls cause VM exits, and the host process emulates Linux system calls.
+- So Noah uses the virtualization technology as a system call hook to catch system calls.
 
 # Nabla Containers: Higher-level hypervisor interface
 
-TODO:
+- The last example is Nabla Containers.
+- In Nabla Containers, the hypervisor does not provide Virtio,it doesn't provide virtual devices.
+- Instead, it provides a high-level interface to the guest.
+
+- Here's the comprehensive list of the hypercalls Nabla provides.
+- Each hypercalls corresponds to a system call in Linux.
+- For example, reading a block device would be translated to reading the disk image in the host OS.
+
+- Nabla demonstrates that if we don't need to care about the compatibility, we have a lot of room to design the guest interface.
 
 # (hardware-assisted) hypervisors look like interpreters
 
