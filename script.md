@@ -254,23 +254,60 @@ TODO:
 
 # What's coming next? - The guest ↔︎ host interface goes higher!
 
-TODO:
+- I think we'll see more higher-level interfaces in the future.
+- Let me share my favorite ideas.
 
 # Virtio alternatives: Do we need a queue interface?
 
-TODO:
+- Virtio is the de facto standard for the guest-host interface.
+- It's a generic queue and can be used for many different purposes such as network device, block device, GPU, file system, and more.
+
+- However, do we really need a queue interface?
+- It's similar to Linux system call design. Linux has an interface similar to virtio called io_uring, but it's just one of the Linux interface designs.
+
+- We can design a new interface. We don't have to be limited by the Virtio.
 
 # Higher-level interfaces in Virtio: virtio-tcp & udp
 
-TODO:
+- Virtio already provides high-level interfaces.
+- For example, file system is abstracted as virtio-fs, based on the file system in userspace.
+
+- However, we don't have high-level abstraction for network sockets such as TCP and UDP.
+- This is a bit challenging because typically TCP/IP implementation does not expect to offload the TCP/UDP processing to the hypervisor.
+
+- Interestingly, we have a previous work.
+- libkrun is a dynamic library to isolate a process into the guest mode.
+- It provides seamless integration with the host environment.
+- One of its integrations is a network stack. Called Transparent Socket Impersonation.
+
+- I think the similar high-level socket interface might be possible in other hypervisors.
 
 # Strongly-isolated JavaScript
 
-TODO:
+- The next idea is to focus on the application, not the hypervisor.
+- This is similar to Hyperlight.
+- Here I brought up JavaScript.
+- Why JavaScript? Not just because it's a popular programming language, but because it's creeping into the backend world, where multi-tenancy technologies like hypervisors are required.
+
+- Today, vedors are building JavaScript-specific clouds, and they are using V8 isolates as a lightweight security boundary.
+
+- However, V8 isolates are not secure enough.
+- Also, hypervisors can be lightweight.
+
+- Designing hypervisor-based JavaScript runtime is not obvious, but if it happens, it could be a good product.
 
 # AI agent sandboxing: LLM↔︎guest interface design
 
-TODO:
+- We're in the age of AI. So let's take a look at AI agent sandboxing.
+- It's becoming a hot topic in the AI agent industry.
+- That is, everybody need hypervisors, not just running virtual machines.
+
+- The question is: what should the hypervisor provide to the AI agent?
+- It's still unclear because the trend is changing so fast.
+
+- But what I expect is people won't be satisfied with the current offering from the cloud providers.
+  - We might need a fast snapshot technology to make AI iterations faster.
+  - We might need a high-level interface for the AI agent to control the sandbox.
 
 # Invest in user (*"developer"*) experience
 
