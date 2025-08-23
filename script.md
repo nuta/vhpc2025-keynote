@@ -305,7 +305,8 @@ TODO:
 
 # AI agent sandboxing: LLM↔︎guest interface design
 
-- We're in the age of AI. So let's take a look at AI agent sandboxing.
+- Next one is our favorite topic: AI.
+- But I'm not going to talk about the AI because it's hot topic in 2025, but because AI, especially AI agents, need hypervisors for sandboxing.
 - It's becoming a hot topic in the AI agent industry.
 - That is, everybody need hypervisors, not just running virtual machines.
 
