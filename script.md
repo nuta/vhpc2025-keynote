@@ -12,11 +12,13 @@
 - I know you are already familiar with this, so let me go through it quickly.
 - Hardware-assisted virtualization is a CPU feature which introduces a new CPU mode, called "guest mode".
 - Once CPU enters the guest mode, CPU executes instructions as usual, and when the guest needs an assistance from the hypervisor, the CPU exits the guest mode and jumps to the hypervisor (or host) kernel, which is called "vm exit".
-- The hypervisor handles the vm exit, like emulating sensitive instructions, emulating memory-mapped I/O, and go back to the guest mode.
+- The hypervisor handles the VM exit, such as emulating sensitive instructions, emulating memory-mapped I/O, and go back to the guest mode.
 
 # Cover: Hardware-assisted try-catch (with continuation)
 
-- TODO:
+- So what I want to share in this talk is that ...
+- Hardware-assisted virtualization such as Intel VT, AMD SVM, and son on are ... hardware-assisted try-catch.
+- In other words, hardware-assisted virtualization can be used as a generic mechanism to run a program in a different world.
 
 # Try-catch pattern
 
@@ -25,17 +27,22 @@
 - Here's a simple example in pseudo code.
 - In `try` block, the program does something that might fail.
 - If it fails, the program jumps to the `catch` block.
-- In other words, `catch` block is a handler to help the program. TODO:
+- In other words, `catch` block is a handler to help the program.
 
 # Try-catch pattern + continuation
 
-TODO:
+- But unlike try-catch in JavaScript, in hardware-assisted virtualization, the `catch` block can continue the program from the point of the failure.
+
+- Let's say the catch block takes the `resume` function as an argument, along with the error object.
+- The `resume` function allows the `catch` block to recover from errors, inject dependencies, and define the behavior of the program.
+- It's also called Algebraic Effects, but I won't go deeper into it.
+
+- I said hardware-assisted virtualization is like try-catch, but I believe you might not be conviced or don't know how hypervisors work under the hood.
 
 # Writing a hypervisor from scratch
 
-TODO:
-
-- Let's discover this try-catch pattern in a hypervisor.
+- So let's take a look at a hypervisor from scratch.
+- And discover this try-catch pattern in a hypervisor.
 
 # Target
 
