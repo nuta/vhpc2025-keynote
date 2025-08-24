@@ -18,7 +18,7 @@
 
 - So what I want to share in this talk is that ...
 - Hardware-assisted virtualization such as Intel VT, AMD SVM, and son on are ... hardware-assisted try-catch.
-- In other words, hardware-assisted virtualization can be used as a generic mechanism to run a program in a different world.
+- In other words, hardware-assisted virtualization can be used as a generic mechanism to run a program in a different world, to implement applications beyond virtual machines.
 
 # Try-catch pattern
 
@@ -31,18 +31,18 @@
 
 # Try-catch pattern + continuation
 
-- But unlike try-catch in JavaScript, in hardware-assisted virtualization, the `catch` block can continue the program from the point of the failure.
+- But unlike try-catch in JavaScript, what if the `catch` block can continue the program from the point of the failure?
 
 - Let's say the catch block takes the `resume` function as an argument, along with the error object.
 - The `resume` function allows the `catch` block to recover from errors, inject dependencies, and define the behavior of the program.
 - It's also called Algebraic Effects, but I won't go deeper into it.
 
-- I said hardware-assisted virtualization is like try-catch, but I believe you might not be conviced or don't know how hypervisors work under the hood.
+- I said hardware-assisted virtualization is like try-catch, but I think you are not convinced or don't know how hypervisors work under the hood.
 
 # Writing a hypervisor from scratch
 
 - So let's take a look at a hypervisor from scratch.
-- And discover this try-catch pattern in a hypervisor.
+- And discover this try-catch pattern in hypervisors.
 
 # Target
 
@@ -84,10 +84,12 @@
 
 - OK so we're ready for bare-metal Rust.
 - Let's go back to the hypervisor.
-- For hypervisor, the first thing would be to prepare guest memory space.
+- For hypervisor, the first thing would be to prepare the guest memory space.
 
 - Guest memory consists of regions.
 - Each region has the base guest address, the size, and the type of the region like: free RAM area that guest may use, or memory-mapped I/O area for virtual devices.
+
+- Guest memory can be defined as a vector of regions, and the guest page table.
 
 # Guest page table
 
@@ -98,21 +100,23 @@
 
 - Now we have a guest memory.
 - Let's fill it with the boot image.
+
+- Here we will use a Linux kernel.
 - Linux kernel defines a raw binary image format for RISC-V.
 - All we need is to verify raw binary image, and copy the image into the base address.
 
 # Enter the guest mode
 
-- Now we're ready to boot the virtual machine.
+- Now we're ready to boot a virtual machine.
 - In RISC-V it's way simpler than other CPUs: write the guest state to registers, and execute the `sret` instruction.
-- Entering the guest mode is very CPU specific but all CPUs do the same thing: load the guest state and start the guest execution.
+- Entering the guest mode is very CPU specific but all CPUs do the same thing: load the guest state and start the guest mode.
 
 # Handle VM eixsts (1/2)
 
 - So we're now in the guest mode.
-- CPU keeps executing instructions in the guest mode as usual, and when it needs an assistance from the hypervisor, it jumps to the hypervisor (or host) kernel, which is called "vm exit".
+- CPU keeps executing instructions in the guest mode as usual, and when it needs an assistance from the hypervisor, it jumps to the hypervisor, which is called "vm exit".
 
-- In RISC-V, VM exit is implemented as a trap. `stvec` register contains the trap handler address, and the handler will be called when a VM exit occurs.
+- In RISC-V, VM exit is implemented as a trap. `stvec` register contains the trap handler address, and the handler will be called when a VM exit happens.
 - The trap handler saves the guest state such as general-purpose registers, and jumps to the handler function.
 
 # Handle VM eixsts (2/2)
@@ -146,9 +150,10 @@ TODO:
 # A life of a hypervisor
 
 - Let's summarize what we've seen so far.
+
 - To put it simply in JavaScript, the life of a hypervisor looks like this.
   1. Prepare guest memory.
-  2. Load the boot image.
+  2. Load the boot image into the guest memory.
   3. Initialize the vCPU state.
   4. Enter the guest mode.
   5. Handle VM exits and go back to the guest mode.
@@ -158,7 +163,7 @@ TODO:
 
 # Hypervisors are the `catch` block (mostly)
 
-- Here's the flow of the hypervisor.
+- Here's the flow of a hypervisor.
 - It enters guest, exit to the host, and the hypervisor catches the VM exit, and continue the guest.
 
 - This is similar to interpreters. In JavaScript, we run a program in a try block, the interpreter keeps running the program, and when the program can't continue, we catch an exception.
@@ -202,8 +207,9 @@ TODO:
   2. Try. Enter the guest mode.
   3. Catch. Handle an exception such as memory-mapped I/O emulation.
   4. Continue. Go back to the guest mode.
-- So hardware-assisted virtualization is not really about emulating hardware, or virtual machines. It's a generic mechanism to run a program in a different world.
-  - This means hardware-assisted virtualization has great potential to be applied to more areas, not only virtual machines.
+- So hardware-assisted virtualization is not really about emulating hardware, or virtual machines.
+- It's a generic mechanism to run a program in a different world.
+- This means hardware-assisted virtualization has great potential to be applied to more areas, not only virtual machines.
 
 # The `try-catch` pattern in action
 
@@ -225,7 +231,7 @@ TODO:
 - Hyperlight provides a strong isolation boundary for multi-tenant services.
 - It's also based on virtualization technology, like Linux KVM.
 
-- gVisor implements Linux system calls, but in Hyperlight, the host provides application-specific hypercalls.
+- gVisor implements Linux system calls, but in Hyperlight, the host defines application-specific hypercalls.
 
 # Noah: Hypervisor for system call emulation
 
@@ -237,7 +243,7 @@ TODO:
 # Nabla Containers: Higher-level hypervisor interface
 
 - The last example is Nabla Containers.
-- In Nabla Containers, the hypervisor does not provide Virtio,it doesn't provide virtual devices.
+- In Nabla Containers, the hypervisor does not provide Virtio, and it doesn't provide virtual devices.
 - Instead, it provides a high-level interface to the guest.
 
 - Here's the comprehensive list of the hypercalls Nabla provides.
@@ -305,7 +311,7 @@ TODO:
 # AI agent sandboxing: LLM↔︎guest interface design
 
 - Next one is our favorite topic: AI.
-- But I'm not going to talk about the AI because it's hot topic in 2025, but because AI, especially AI agents, need hypervisors for sandboxing.
+- I'm going to talk about the AI not because it's a hot topic in 2025, but because AI, especially AI agents, need hypervisors for sandboxing.
 - It's becoming a hot topic in the AI agent industry.
 - That is, everybody need hypervisors, not just running virtual machines.
 
@@ -318,8 +324,8 @@ TODO:
 
 # Invest in user (*"developer"*) experience
 
-- This is the last slide. I've shown you some examples of higher-level interfaces like: new virtio, and new hypercalls.
-- But, going higher abstraction does not always mean inventing new interfaces.
+- This is the last example. I've shown you some examples of higher-level interfaces like: new virtio, and new hypercalls.
+- But, going higher abstraction does not always mean inventing new technologies.
 
 - That is, designing the user, or "developer" interface is also important.
 - An example is "hypervisor as a library", it is a blog post I wrote recently.
