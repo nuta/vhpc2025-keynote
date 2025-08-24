@@ -173,7 +173,8 @@ static GUEST_MEMORY: GuestMemory = GuestMemory::new();
 assert!(is_valid_riscv_image(LINUX_BIN));
 
 // Allocate memory region and map it to the guest page table.
-let buf: &mut [u8] = GUEST_MEMORY.allocate(GUEST_BASE_ADDR, GUEST_MEMORY_SIZE);
+let buf: &mut [u8]
+    = GUEST_MEMORY.allocate(GUEST_BASE_ADDR, GUEST_MEMORY_SIZE);
 
 // Copy the kernel image into the allocated region.
 buf.copy_from_slice(LINUX_BIN);
@@ -300,14 +301,14 @@ code {
 ```rs
 match read_csr!(scause) {
     Scause::StoreGuestPageFault => {
-        let (inst_len, rs, guest_addr) = decode_fault_details(); // Read CSRs here
+        let (inst_len, rs, guest_addr) = todo!("read other CSRs here");
         let value = match rs { // Read the register value
             1 => VCPU.ra,
             2 => VCPU.sp,
             ...
         };
         if is_virtio_blk_range(guest_addr) { // Is it in a MMIO region?
-            handle_virtio_blk_mmio(guest_addr, value); // Handle it as a MMIO if so
+            handle_virtio_blk_mmio(guest_addr, value); // Handle MMIO if so
         } else {
             panic!("unexpected write: {:#x}", guest_addr);
         }

@@ -51,8 +51,9 @@ layout: center
 <div class="text-center">
 Intel VT/AMD SVM/Arm VHE/RISC-V H are ...
 
+  <v-click>
   <h1 class="my-4 font-bold"> hardware-assisted try-catch <br><span class="text-2xl">(with continuation)</span> </h1>
-
+  </v-click>
 </div>
 
 ---
@@ -115,6 +116,8 @@ for (;;) {
     }
 }
 ```
+
+- Key point: The guest keeps running until it needs an assistance!
 
 ---
 
@@ -433,10 +436,11 @@ What's coming next?
 layout: two-cols-header
 ---
 
-# Invest in user (*"developer"*) experience
+# Invest in user experience (or *"developer"* experience)
 
 - Example: Hypervisor as a library<sup>5</sup> - use a VM like a subprocess.
 - No novel tech here: just change how your hypervisor look like!
+- Make people fall in love with your products by a nice API.
 
 <style>
 code {
@@ -445,7 +449,7 @@ code {
 </style>
 
 <div class="text-xl mt-4">
-❌ Exposing implementation details of hypervisor:
+❌ Exposing implementation details:
 </div>
 
 ```
@@ -453,17 +457,15 @@ qemu-system-x86_64 -kernel guest.bin -hda cowsay.img -serial stdio ...
 ```
 
 <div class="text-xl mt-4">
-✅ Provide a higher-level convenient interface:
+✅ Provide a higher-level interface:
 </div>
 
 ```rs
-use starina_linux::Command;
+use starina_linux::{Command, Stdin};
 
 let cmd = Command::new("/bin/cowsay")
-    .stdin(stdin)
-    .stdout(stdout)
+    .stdin(Stdin::from("Hello, world!"))
     .spawn()
-    .expect("failed to run cowsay in Linux microVM");
 ```
 
 <div class="text-center text-gray-700 text-lg mt-4">
