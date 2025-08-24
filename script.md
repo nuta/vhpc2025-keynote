@@ -202,7 +202,6 @@ TODO:
   2. Try. Enter the guest mode.
   3. Catch. Handle an exception such as memory-mapped I/O emulation.
   4. Continue. Go back to the guest mode.
-- TODO:
 - So hardware-assisted virtualization is not really about emulating hardware, or virtual machines. It's a generic mechanism to run a program in a different world.
   - This means hardware-assisted virtualization has great potential to be applied to more areas, not only virtual machines.
 

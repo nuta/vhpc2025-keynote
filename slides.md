@@ -2,7 +2,6 @@
 theme: default
 title: Writing a Hypervisor From Scratch
 info:
-class: text-center
 drawings:
   persist: false
 transition: false
@@ -13,11 +12,15 @@ fonts:
   mono: JetBrains Mono
 ---
 
-## Writing a Hypervisor From Scratch
+<div style="font-size: 2em !important">
+Writing a Hypervisor from Scratch
+</div>
 
+<div class="mt-10">
 Seiya Nuta
 
 <nuta@seiya.me>
+</div>
 
 ---
 layout: center
@@ -247,8 +250,9 @@ seL4_Bool fault(size_t vcpu_id, microkit_msginfo msginfo, ...) {
   3. **Catch:** Handle an exception (e.g. emulate MMIO)
   4. **Continue:** Jump to step 2
 
-- Virtual Machine Monitor (VMM) in userspace (e.g. Firecracker) is a convenient/secure form of implementing the catch block.
-
+- Hardware-assisted virtualization is not about emulating hardwares.
+- It is a generic mechanism to build a different "world" (guest mode).
+- That is, it can be applied to more areas, not only virtual machines!
 ---
 layout: cover
 ---
@@ -296,7 +300,7 @@ layout: two-cols-header
 
 - Linux binary compatibility using a hypervisor.
 - Linux binaries run in the guest mode without a guest kernel.
-- Hypervisor as a system call hook.
+- Hypervisor as a system call hook: "catch" the system calls.
 
 <img src="./diagrams/noah.svg" class="my-8 mx-auto scale-120" />
 
@@ -368,7 +372,10 @@ tbody tr td {
   - Application-specific interfaces are OK.
   - Virtio is a great generic queue, but we don't need to stick to it.
 
-From this perspective, don't Hyperlight, gVisor, Noah sound familar to you?
+<div class="text-center mt-10 font-bold">
+gVisor/Hyperlight/Noah are great examples
+<br>beyond virtual machines!
+</div>
 
 ---
 layout: cover
@@ -415,11 +422,12 @@ What's coming next?
 
 # AI agent sandboxing: LLM↔︎guest interface design
 
-- We can't trust what LLMs do (e.g. it might do `rm -rf /`).
-- Hot topic in industry: especially for coding agents.
+- AI agents need a sandbox (or "workspace") to do their work.
+  - We can't trust what LLMs do (e.g. it might do `rm -rf /`).
+  - This means everybody would need (more) hypervisors!
 - How should LLMs control the sandboxed environment?
 
-<img src="./diagrams/llm-sandbox.svg" class="ml-30 scale-95" />
+<img src="./diagrams/llm-sandbox.svg" class="ml-30 -mt-5 scale-87" />
 
 ---
 layout: two-cols-header

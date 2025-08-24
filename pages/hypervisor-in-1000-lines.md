@@ -267,7 +267,7 @@ fn handle_trap() -> ! {
 
 ---
 
-# VM Exit (1/2): Hypervisor call
+# VM Exit (1/2): Hypervisor calls
 
 - Similar to system calls, but calls hypervisor functions (SBI in RISC-V).
 
@@ -320,4 +320,6 @@ match read_csr!(scause) {
 
 # More on web!
 
-- Visit https://1000hv.seiya.me if you are interested in the complete contents :)
+- Visit **https://1000hv.seiya.me** for more details
+
+<img src="../diagrams/1000hv.png" class="mx-auto mt-4" />
