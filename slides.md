@@ -23,6 +23,19 @@ Seiya Nuta
 </div>
 
 ---
+
+# `whoami`
+
+- Seiya Nuta <<nuta@seiya.me>>
+- A software engineer at Vercel (not so related to this talk)
+- A hobbyist operating system creator
+  - A Linux binary compatible kernel in Rust
+  - [Operating System in 1,000 Lines](https://1000os.seiya.me)
+  - A general-purpose microkernel OS for production
+    (in progress)
+
+
+---
 layout: center
 ---
 
@@ -77,21 +90,24 @@ try {
 
 # Try-catch pattern + continuation
 
-- Let's assume that we have a `resume` callback:
+- Let's assume `resume with` syntax to resume the program<sup>1</sup>:
 
 ```ts
 try {
     emoji = readFile("emoji.txt");
-} catch (error, resume) {
-    if (error instanceof FileNotFoundError) {
-        resume("🍎");
+    print(emoji); //=> "🍎"
+} catch (action) {
+    if (action === 'readFile') { // Catch "readFile" operation
+        resume with "🍎";
     }
-
-    panic(`failed to read a file: ${error}`);
 }
 ```
 
-- cf. Algebraic Effects
+**My today's topic:** Hypervisors are similar to ... this `catch` block.
+
+<div class="text-center text-gray-700 text-lg mt-4">
+<sup>1</sup> Algebraic Effects for the Rest of Us: https://overreacted.io/algebraic-effects-for-the-rest-of-us/
+</div>
 
 ---
 src: ./pages/hypervisor-in-1000-lines.md
