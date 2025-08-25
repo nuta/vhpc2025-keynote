@@ -24,7 +24,7 @@ Seiya Nuta
 
 ---
 
-# `whoami`
+# Who am I
 
 - Seiya Nuta <<nuta@seiya.me>>
 - A software engineer at Vercel (not so related to this talk)
